@@ -1,5 +1,6 @@
-# khinsider-mp3-downloader
+# khinsider-mass-downloader-fixed
 
+This is a fork fixed from the original repo: https://github.com/trash/khinsider-mp3-downloader
 A script to crawl `http://downloads.khinsider.com/` for game soundtracks and download them. Downloads will be placed inside a `/downloads` directory inside the repo. Individual directories for each album will be generated automatically off the url name.
 
 ## Install
@@ -11,7 +12,8 @@ Tested and working with python 3.8.
 
 ### `inputs.txt`
 
-Update the `inputs.txt` in the repo with a list of links, one link per line, and then run the script `$ python3 downloader.py`.
+Update the `inputs.txt` in the repo with a list of links, one link per line, and then run the script 
+`$ python3 downloader.py`.
 The repo includes a properly formatted `inputs.txt` for reference.
 
 ### Input A URL Via CLI

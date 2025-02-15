@@ -2,6 +2,7 @@ import os
 import urllib.parse as urlparse
 import urllib.request as urllib2, json
 from bs4 import BeautifulSoup
+import re
 
 BASE_URL = 'https://downloads.khinsider.com'
 
@@ -19,7 +20,7 @@ def fetch_from_url (url):
 
 	base_dir = 'downloads'
 	url_parts = url.split('/')
-	dir_name = base_dir + '/' + url_parts[len(url_parts) - 1]
+	dir_name = os.path.join(base_dir, url_parts[-1].strip())
 
 	# Create directories
 	if not os.path.exists(base_dir):
@@ -65,7 +66,7 @@ def fetch_from_url (url):
 		if mp3_url not in downloaded_mp3s:
 			downloaded_mp3s[mp3_url] = True
 			parts = mp3_url.split('/')
-			file_name = song_name + '.mp3'
+			file_name = re.sub(r'[<>:"/\\|?*]', '', song_name) + '.mp3'
 
 			mp3file = urllib2.urlopen(mp3_url)
 
@@ -95,12 +96,9 @@ if os.path.exists(input_file_name):
 	print('[info] Input file found. Parsing for links...')
 	file = open(input_file_name, 'r')
 	for line in file:
-		fetch_from_url(line)
+		fetch_from_url(line.strip())
 else:
 	print('Please input link in quotes to album on khinsider.')
 	print('Example input (including quotes): \'http://downloads.khinsider.com/game-soundtracks/album/disgaea-4-a-promise-unforgotten-soundtrack\'')
 	url = input('Url: ')
 	fetch_from_url(url)
-
-# For testing
-# url = 'http://downloads.khinsider.com/game-soundtracks/album/disgaea-4-a-promise-unforgotten-soundtrack'
