@@ -1,4 +1,2 @@
-venv
-downloads
-.DS_Store
-/rename.ps1
+downloads/
+
